@@ -45,7 +45,7 @@ function handleOffer({ sdp }: { sdp: RTCSessionDescriptionInit; sender: string }
 }
 
 function handleIceCandidate({ candidate }: { candidate: RTCIceCandidateInit }) {
-    peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+    if (peerConnection.remoteDescription) peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
 }
 
 socketService.on('offer', handleOffer);
