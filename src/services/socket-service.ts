@@ -7,10 +7,14 @@ class SocketService {
 
   constructor() {
     this.socket = null;
+    this.connect('http://localhost:3000');
   }
 
   connect(url: string): void {
-    this.socket = io(url);
+    this.socket = io(url, {
+      transports: ['websocket', 'polling'],
+      withCredentials: true,
+    })
 
     this.socket.on('connect', () => {
       console.log('Socket connected:', this.socket?.id);
