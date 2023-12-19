@@ -23,8 +23,6 @@ class SocketService {
     this.socket.on('disconnect', () => {
       console.log('Socket disconnected');
     });
-
-    // Añadir más manejadores de eventos según sea necesario
   }
 
   emit(event: string, data: any): void {
