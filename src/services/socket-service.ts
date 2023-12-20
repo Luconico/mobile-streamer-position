@@ -3,11 +3,11 @@ import { io, Socket } from 'socket.io-client';
 type EventHandler = (data: any) => void;
 
 class SocketService {
-  private socket: Socket | null;
+  public socket: Socket | null;
 
   constructor() {
     this.socket = null;
-    this.connect('http://localhost:3000');
+    this.connect('https://api.webrtc.chambe.dev/');
   }
 
   connect(url: string): void {
@@ -23,6 +23,10 @@ class SocketService {
     this.socket.on('disconnect', () => {
       console.log('Socket disconnected');
     });
+  }
+
+  getSocketId(): string | undefined {
+    return this.socket?.id;
   }
 
   emit(event: string, data: any): void {

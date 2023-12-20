@@ -1,7 +1,7 @@
 <template>
     <div>
         <input v-model="state.targetId" placeholder="ID del destinatario">
-        <video ref="localVideo" autoplay muted></video>
+        <video ref="localVideo" autoPlay='true' muted='true' playsInline='true'></video>
         <button @click="startCall">Iniciar Llamada</button>
     </div>
 </template>
@@ -16,6 +16,7 @@ const state = reactive({ targetId: '' });
 
 onMounted(async () => {
     try {
+        // For desktop await navigator.mediaDevices.getDisplayMedia({ video: true })
         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         if (localVideo.value) {
             localVideo.value.srcObject = stream;
@@ -23,6 +24,7 @@ onMounted(async () => {
         setupPeerConnection(stream);
     } catch (error) {
         console.error('Error al acceder a los dispositivos:', error);
+        alert('Error al acceder a los dispositivos' + error);
     }
 });
 
